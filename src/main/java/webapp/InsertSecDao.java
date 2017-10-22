@@ -6,10 +6,6 @@ import java.util.Calendar;
 
 public class InsertSecDao {
 
-	 String url = "jdbc:mysql://localhost/istassess";
-	 String username = "root";
-	 String password = "Aakash00@@";
-	 Connection con;
 	 
 	 int perc;
 	 
@@ -17,16 +13,6 @@ public class InsertSecDao {
 	 String desc;
 	 String section[];
     	 
-	PreparedStatement getConnection(String sql) throws SQLException, ClassNotFoundException {
-		
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection(url,username,password);
-		PreparedStatement st = con.prepareStatement(sql);
-		
-		return st;
-			
-	}
-	
 	 
 	void setSectionReport(String sec,String outOf, String grades) throws ClassNotFoundException, SQLException {
 		
@@ -37,8 +23,10 @@ public class InsertSecDao {
 		
 		String sql = "select percentageofstudents from evaluations where courseNumber = ?  and programName = ?";
 		
-        PreparedStatement st = getConnection(sql);
+		DatabaseConnect db = new DatabaseConnect();
 		
+		PreparedStatement st = db.getConnection(sql);
+				
 		st.setString(1, secsplit[0].trim());
 		st.setString(2, secsplit[3].trim());
 
@@ -61,7 +49,7 @@ public class InsertSecDao {
 		String insertTableSQL = "INSERT INTO SectionsReported"
 				+ " VALUES"
 				+ "(?,?,?,?,?,?,?,?,?)";
-		st = getConnection(insertTableSQL);
+		st = db.getConnection(insertTableSQL);
 		
 		System.out.println(secsplit[3].trim());
 		
@@ -76,15 +64,9 @@ public class InsertSecDao {
 		st.setString(9, grades);
 		
 		
-		
-	//	System.out.println(grades);
-		
-		
-		
-			//System.out.println(secsplit[0].trim() + secsplit[1].trim()+ secsplit[3].trim());
-		
 		st.executeUpdate();
-		con.close();
+		db.closeConnection();
+		
 		
 					
 	}

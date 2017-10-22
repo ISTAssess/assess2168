@@ -24,7 +24,7 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     
     <script>
-      function validateForm() {
+      function validateForm()  {
     	  var flag=0;
     	  console.log(document.getElementById("outOf"));
    		 var x = document.getElementById("outOf");
@@ -46,6 +46,8 @@
    		 return true;
    		}  
    		else  
+   			
+   			
    		{  
    			if(flag==1){
    				alert('Must be a Positive Integer Value'); 
