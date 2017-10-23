@@ -24,7 +24,7 @@ public class SectionDao {
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
 			sections.add(rs.getString("coursenumber")+ " | " + rs.getString("sectionnumber") + " | " + rs.getString("coursename").replaceAll("&", "and")+ " | " + rs.getString("programname"));
-			//programHostName.add(rs.getString("programhostname"));
+			
 		}
 		db.closeConnection();
 		rs.close();

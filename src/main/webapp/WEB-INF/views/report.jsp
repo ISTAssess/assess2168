@@ -50,11 +50,12 @@
    			
    		{  
    			if(flag==1){
+   				
    				alert('Must be a Positive Integer Value'); 
    			y.focus();
    		}
    			else {
-   		alert('Must be a Positive Integer Value');  
+   				alert('Must be a Positive Integer Value');  
    		x.focus();  
    		
    			}
@@ -82,22 +83,21 @@
             <b>Grade Item:</b> ${ins} <br /><br />
             <b>Program Outcome:</b> ${desc} <br /><br />
             
-              <b><label for="gr">Grades are out of</label></b>  <input type="text" id = "outOf"  name="outOf" required> <br /><br />
+              <b><label for="gr">Grades are out of</label></b>  <input type="text" id = "outOf"  name="outOf" placeholder= "100" value = "${gradeOutOf}" required> <br /><br />
               <b><label for="engr">Enter grades (Copy from MyCourses and paste here)</label></b> <br />
               <font size="3" color="red">${status}</font>
               <br />
-              <textarea class="form-control" rows="6" name="enterGrades" id= "enterGrades" required></textarea>
+              <textarea class="form-control" rows="6" name="enterGrades" id= "enterGrades" required>${grades} </textarea>
               </div>
              <input type="hidden" name="sec" value = "${sec}|${ins}|${desc}">
-            <input type="submit" class="btn btn-primary mx-auto mt-3">
+            <input type="submit" name="btnVal" value = ${btnValue} class="btn btn-primary mx-auto mt-3">
             <input type="button" value = "Cancel" class="btn btn-primary mx-auto mt-3" onclick="self.close()">
             
           </form>
          </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript -->
+        <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper/popper.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>

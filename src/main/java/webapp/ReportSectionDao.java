@@ -46,11 +46,47 @@ public class ReportSectionDao {
 		}
 	
 	String getSection(){
-		
-		
 	
-	return section[0]+ '~' + section[1] + '~' +section[2]+ '~' +section[3];	
+	   return section[0]+ '~' + section[1] + '~' +section[2]+ '~' +section[3];	
 	}
-}
+	
+	ArrayList<String> checkSecReported(String courseNum, String sectionNum, String progName, String term) throws SQLException, ClassNotFoundException
+	{
+		
+		String sql= "select gradesOutOf,grades from SectionsReported where courseNumber = ?"
+				    + " and sectionNumber = ?"
+				    + " and programName = ?"
+				    + " and term  = ?";
+		DatabaseConnect db = new DatabaseConnect();
+		
+		PreparedStatement st = db.getConnection(sql);
+		ArrayList<String> secResult  =  new ArrayList<String>();
+		st.setString(1, courseNum);
+		st.setString(2, sectionNum);
+		st.setString(3, progName);
+		st.setString(4, term);
+		ResultSet rs = st.executeQuery();
+		if(rs.next()) {
+			
+			int gradeInt = (int)rs.getDouble("gradesOutOf");
+			
+			secResult.add(String.valueOf(gradeInt));
+			secResult.add(rs.getString("grades"));
+			db.closeConnection();
+			rs.close();
+			return secResult;
+		
+		}
+		else {
+			db.closeConnection();
+			rs.close();
+			return secResult;
+		}
+		}
+		
+		
+	}
+
+
 	 
 
