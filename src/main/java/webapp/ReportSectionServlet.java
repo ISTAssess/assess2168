@@ -45,7 +45,7 @@ public class ReportSectionServlet extends HttpServlet {
 			}
 			else
 			{
-			request.setAttribute("btnValue", "Insert");	
+				request.setAttribute("btnValue", "Insert");	
 			}
 			
 			request.getRequestDispatcher("/WEB-INF/views/report.jsp").forward(request, response);	

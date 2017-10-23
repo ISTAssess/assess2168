@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 	        session.setAttribute("name",dao.usern);
 	        session.setAttribute("username",name);
 	        session.setAttribute("path",dao.imgPath);
+	        System.out.println(dao.imgPath);
 	        
 	        try {
 				System.out.println();

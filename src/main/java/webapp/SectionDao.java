@@ -20,12 +20,26 @@ public class SectionDao {
 		PreparedStatement st = db.getConnection(sql);
 		st.setString(1, username);
 		st.setString(2, "2165");
+		
+		ReportSectionDao rd =  new ReportSectionDao();
+		
 			
 		ResultSet rs = st.executeQuery();
 		while(rs.next()) {
-			sections.add(rs.getString("coursenumber")+ " | " + rs.getString("sectionnumber") + " | " + rs.getString("coursename").replaceAll("&", "and")+ " | " + rs.getString("programname"));
+			
+			ArrayList<String> secResult = rd.checkSecReported(rs.getString("coursenumber"), rs.getString("sectionnumber"),rs.getString("programname"), "2165");
+
+			if(secResult.isEmpty()){		
+			sections.add(rs.getString("coursenumber")+ " | " + rs.getString("sectionnumber") + " | " + rs.getString("coursename").replaceAll("&", "and")+ " | " + rs.getString("programname")+" | " + "Report");
+			}
+			else{
+				sections.add(rs.getString("coursenumber")+ " | " + rs.getString("sectionnumber") + " | " + rs.getString("coursename").replaceAll("&", "and")+ " | " + rs.getString("programname")+" | " + "Update");
+	
+			}
 			
 		}
+		
+		
 		db.closeConnection();
 		rs.close();
 		

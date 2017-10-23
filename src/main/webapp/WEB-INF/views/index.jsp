@@ -189,10 +189,23 @@
     <table style="width:75%">
     <c:forEach items="${section}" var="item">
          
+         <% String sec = ((String)pageContext.getAttribute("item"));
+      	    String secSplit[] = sec.split("\\|");
+      	   
+      	   %>
       <tr>
       
-      	 <td> <span class="nav-link-text"> <button type="button" id= "report" class="btn btn-primary" onclick="doPost( '${item}');">Report</button>
+      	 <td> <span class="nav-link-text"> <button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}');">
+      	 
+      	 
+      	 
+      	 <%=secSplit[4] %>
+      	 
+      	 
+      	 </button>
              </span>  </td>
+             
+             
         
           <td> <span class="nav-link-text">
                   ${item}</span> 

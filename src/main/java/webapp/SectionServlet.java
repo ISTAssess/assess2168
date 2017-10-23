@@ -46,9 +46,11 @@ public class SectionServlet extends HttpServlet {
 		
 		
 	     SectionDao sd = new SectionDao();
+	    
 		
 	        try {
 				//System.out.println(sd.getUserSection(name,role));
+	        	
 						
 			request.setAttribute("section",sd.getUserSection(name,role));
 			request.setAttribute("programHostName",sd.getProgramHostName());
