@@ -197,23 +197,14 @@
       
       	 <td> <span class="nav-link-text"> <button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}');">
       	 
-      	 
-      	 
-      	 <%=secSplit[4] %>
-      	 
-      	 
+       	 <%=secSplit[4] %>
+      
       	 </button>
              </span>  </td>
-             
-             
-        
-          <td> <span class="nav-link-text">
-                  ${item}</span> 
+             <td> <span class="nav-link-text">
+                  <%=secSplit[0] + " | " +secSplit[1] + " | "+ secSplit[2] + " | " + secSplit[3]%></span> 
                
          </tr>
-        
-      
-        
         </c:forEach>  
 	</table>
 	 </div>
