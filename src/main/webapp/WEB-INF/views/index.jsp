@@ -207,7 +207,7 @@
          </tr>
         </c:forEach>  
 	</table>
-	 </div>
+	 </div> 
     <!-- /.content-wrapper -->
 
     <footer class="sticky-footer">
