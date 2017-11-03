@@ -184,27 +184,67 @@
         </ul>
       </div>
     </nav>
+    
+    
+    <div class="container content-wrapper" id="content">
+		<h2>Faculty View</h2>
+		<p>Submit class and section reports here.</p> 
+	    <table class="table table-hover" style="width:75%">
+			<thead>
+			  <tr>
+			  	<th>Action</th>
+			    <th>Course</th>
+			    <th>Section</th>
+			    <th>Name</th>
+			    <th>Department</th>
+			  </tr>
+			</thead>
+			<tbody>
+	    		<c:forEach items="${section}" var="item">
+					<%
+						String sec = ((String)pageContext.getAttribute("item"));
+						String secSplit[] = sec.split("\\|");
+					%>
+					<tr>
+						<td>
+							<span class="nav-link-text">
+								<button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}');">
+									<%=secSplit[4] %>
+								</button>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[0]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[1]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[2]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[3]%>
+							</span>
+						</td>
+					</tr>
+				</c:forEach>
+	        </tbody> 
+		</table>
+	</div>
+    
+    
+    
 
     <div class="content-wrapper" id="content">
     <table style="width:75%">
     <c:forEach items="${section}" var="item">
-         
-         <% String sec = ((String)pageContext.getAttribute("item"));
-      	    String secSplit[] = sec.split("\\|");
-      	   
-      	   %>
-      <tr>
-      
-      	 <td> <span class="nav-link-text"> <button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}');">
-      	 
-       	 <%=secSplit[4] %>
-       
-      	 </button>
-             </span>  </td>
-             <td> <span class="nav-link-text">
-                  <%=secSplit[0] + " | " +secSplit[1] + " | "+ secSplit[2] + " | " + secSplit[3]%></span> 
-               
-         </tr>
         </c:forEach>  
 	</table>
 	 </div> 
