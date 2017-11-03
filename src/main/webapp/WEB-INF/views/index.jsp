@@ -1,10 +1,7 @@
 <%@page import="java.util.*"%>
-<%@ taglib prefix="fn" 
-       uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +10,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
     <title>Assessment-Tool</title>
 
     <!-- Bootstrap core CSS -->
@@ -26,35 +20,29 @@
 
     <!-- Plugin CSS -->
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
-     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
     <style>
-    label, input { display:block; }
-    input.text { margin-bottom:12px; width:95%; padding: .4em; }
-    fieldset { padding:0; border:0; margin-top:25px; }
-    h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-    .ui-dialog .ui-state-error { padding: .3em; }
-    .validateTips { border: 1px solid transparent; padding: 0.3em; }
-  </style>
+	    label, input { display:block; }
+	    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	    fieldset { padding:0; border:0; margin-top:25px; }
+	    h1 { font-size: 1.2em; margin: .6em 0; }
+	    div#users-contain { width: 350px; margin: 20px 0; }
+	    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+	    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+	    .ui-dialog .ui-state-error { padding: .3em; }
+	    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+	</style>
 
     <!-- Custom styles for this template -->
-
     <link href="css/sb-admin.css" rel="stylesheet">
     
     <script>
-    
-    function doPost(obj){
-    	
-    	   	
-         window.open("/Report.do?parm1="+obj);
-    	
-    }
-    
+	    function doPost(obj) {
+			window.open("/Report.do?parm1="+obj);
+	    }
     </script>
 
   </head>
@@ -64,7 +52,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <a class="navbar-brand" href="#">Assessment-Tool</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button style="margin: 0 auto;" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -87,7 +75,7 @@
          
          </li>
       </c:forEach>  
-        </ul>
+    </ul>
        
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
@@ -187,7 +175,7 @@
     
     
     <div class="container content-wrapper" id="content">
-		<h2>Faculty View</h2>
+		<h2><%= request.getParameter("Role") %> View</h2>
 		<p>Submit class and section reports here.</p> 
 	    <table class="table table-hover" style="width:75%">
 			<thead>
