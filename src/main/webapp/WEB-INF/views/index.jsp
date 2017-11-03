@@ -238,16 +238,7 @@
 	        </tbody> 
 		</table>
 	</div>
-    
-    
-    
 
-    <div class="content-wrapper" id="content">
-    <table style="width:75%">
-    <c:forEach items="${section}" var="item">
-        </c:forEach>  
-	</table>
-	 </div> 
     <!-- /.content-wrapper -->
 
     <footer class="sticky-footer">
