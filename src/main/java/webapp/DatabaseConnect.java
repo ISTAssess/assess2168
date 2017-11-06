@@ -8,15 +8,15 @@ import java.sql.SQLException;
 public class DatabaseConnect {
 	
 	
-	String url = "jdbc:mysql://localhost/istassess";
+	String url = "jdbc:mysql://localhost/istassess?autoReconnect=true&useSSL=false";
 	String username = "root";
-	String password = "Aakash00@@";
+	String password = "student";
 	Connection con;
 	 
 	 
 	 PreparedStatement getConnection(String sql) throws SQLException, ClassNotFoundException {
 			
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url,username,password);
 			PreparedStatement st = con.prepareStatement(sql);
 			
