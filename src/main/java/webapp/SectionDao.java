@@ -9,17 +9,18 @@ public class SectionDao {
 	 ArrayList<String> programHostName  =  new ArrayList<String>();
     	 
 	 
-	ArrayList<String> getUserSection(String username, String role) throws ClassNotFoundException, SQLException {
+	ArrayList<String> getUserSection(String username, String role,String term) throws ClassNotFoundException, SQLException {
 		
 		String sql = "select c.coursenumber, s.sectionnumber, c.coursename , e.programname from sections s, courses c, evaluations e " +
 					"where  s.coursenumber = c.coursenumber and  e.coursenumber  = c. coursenumber and " + 
-					" s.instructor = ?  and s.term >= ? "; 
+					" s.instructor = ?  and s.term = ? "; 
 		
+		System.out.println(term);
 		ArrayList<String> sections  =  new ArrayList<String>();
 		DatabaseConnect db = new DatabaseConnect();
 		PreparedStatement st = db.getConnection(sql);
 		st.setString(1, username);
-		st.setString(2, "2165");
+		st.setString(2, term);
 		
 		ReportSectionDao rd =  new ReportSectionDao();
 		

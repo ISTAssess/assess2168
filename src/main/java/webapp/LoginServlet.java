@@ -58,6 +58,8 @@ public class LoginServlet extends HttpServlet {
 				
 				session.setAttribute("userRoles",dao.getUserRoles(name));
 				
+				session.setAttribute("terms",dao.getTerm());
+				
 			//	session.setAttribute("userRoles",sd.getUserSection(name));
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block

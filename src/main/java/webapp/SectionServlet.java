@@ -41,7 +41,8 @@ public class SectionServlet extends HttpServlet {
 		//System.out.println("aakash");
 		
 		  String name=request.getParameter("InputUserName1");  
-	      String role=request.getParameter("Role");  
+	      String role=request.getParameter("Role"); 
+	      String term=request.getParameter("Term"); 
 	     System.out.println(request.getParameter("name"));
 		
 		
@@ -52,8 +53,9 @@ public class SectionServlet extends HttpServlet {
 				//System.out.println(sd.getUserSection(name,role));
 	        	
 						
-			request.setAttribute("section",sd.getUserSection(name,role));
+			request.setAttribute("section",sd.getUserSection(name,role,term));
 			request.setAttribute("programHostName",sd.getProgramHostName());
+			request.setAttribute("term",term);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

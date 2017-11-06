@@ -40,8 +40,20 @@
     <link href="css/sb-admin.css" rel="stylesheet">
     
     <script>
+    
+    
+    
 	    function doPost(obj) {
 			window.open("/Report.do?parm1="+obj);
+	    }
+	    function changeContent(userName,Role,term) {
+	    	
+	 // var $dialog = $('<div><select><option value="item1">item1</option></select></div>').dialog({});
+           // 
+	    	window.open("section.do?InputUserName1="+userName+"&Role="+Role+"&Term="+term.value,"_self");
+	    	//alert(term.value);
+	    //	document.getElementById("t1").value = term.value;
+	       // $('#content').load('login.jsp');
 	    }
     </script>
 
@@ -67,7 +79,7 @@
           </li>
        <c:forEach items="${userRoles}" var="item">
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="/section.do?InputUserName1=${username}&Role=${item}">
+            <a class="nav-link" href="javascript:changeContent('${username}','${item}','2165')">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">
                   ${item}</span>
@@ -175,8 +187,30 @@
     
     
     <div class="container content-wrapper" id="content">
+       <%  if(request.getParameter("Role")!=null) {
+    	   %>
 		<h2><%= request.getParameter("Role") %> View</h2>
-		<p>Submit class and section reports here.</p> 
+		<% } %>
+		
+		
+		
+		
+		<%  if(request.getParameter("Role")!=null) 
+		   if(request.getParameter("Role").equals("Faculty")) {
+					%>
+		
+		<font size="3" color="green">Select term </font> <select class="selectpicker" data-style="btn-primary" id = "t1" onchange="changeContent('${username}','Faculty',this)">
+		<c:forEach items="${terms}" var="term"> 
+		<option>${term} </option>
+		</c:forEach> 
+		</select><br />
+		
+		
+		<p>Submit class and section reports here.</p>
+		
+		
+		
+		<font size="3" color="green">Term: ${term}</font>
 	    <table class="table table-hover" style="width:75%">
 			<thead>
 			  <tr>
@@ -189,6 +223,7 @@
 			</thead>
 			<tbody>
 	    		<c:forEach items="${section}" var="item">
+	    		
 					<%
 						String sec = ((String)pageContext.getAttribute("item"));
 						String secSplit[] = sec.split("\\|");
@@ -225,6 +260,7 @@
 				</c:forEach>
 	        </tbody> 
 		</table>
+		<% } %>
 	</div>
 
     <!-- /.content-wrapper -->

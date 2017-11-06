@@ -69,5 +69,28 @@ public class LoginDao {
 		
 		
 	}
+	
+    ArrayList<String> getTerm() throws ClassNotFoundException, SQLException {
+		
+		sql = "select * from terms";
+		
+		ArrayList<String> terms  =  new ArrayList<String>();
+		
+		DatabaseConnect db = new DatabaseConnect();
+		PreparedStatement st = db.getConnection(sql);
+		
+		ResultSet rs = st.executeQuery();
+		while(rs.next()) {
+			terms.add(rs.getString("term"));
+		
+		}
+		db.closeConnection();
+		rs.close();
+		
+		return terms;
+		
+		
+		
+	}   
 	 
 }
