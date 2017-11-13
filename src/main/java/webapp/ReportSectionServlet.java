@@ -17,7 +17,7 @@ public class ReportSectionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 	
 		String section=request.getParameter("parm1");  
-		
+		String term = request.getParameter("term");
 		String sec[] = section.split("\\|");
 		System.out.println(sec[3]);
 		
@@ -27,7 +27,7 @@ public class ReportSectionServlet extends HttpServlet {
 			rd.getSectionReport(sec);
 			
 			
-			ArrayList<String> secResult = rd.checkSecReported(sec[0].trim(), sec[1].trim(), sec[3].trim(), "2165");
+			ArrayList<String> secResult = rd.checkSecReported(sec[0].trim(), sec[1].trim(), sec[3].trim(), term);
         	
         	//System.out.println(check);
         	

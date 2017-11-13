@@ -9,7 +9,7 @@ public class SectionDao {
 	 ArrayList<String> programHostName  =  new ArrayList<String>();
     	 
 	 
-	ArrayList<String> getUserSection(String username, String role,String term) throws ClassNotFoundException, SQLException {
+	ArrayList<String> getUserSection(String username,String term) throws ClassNotFoundException, SQLException {
 		
 		String sql = "select c.coursenumber, s.sectionnumber, c.coursename , e.programname from sections s, courses c, evaluations e " +
 					"where  s.coursenumber = c.coursenumber and  e.coursenumber  = c. coursenumber and " + 

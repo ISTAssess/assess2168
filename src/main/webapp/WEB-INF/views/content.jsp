@@ -30,8 +30,11 @@
     <!-- Custom styles for this template -->
     
     <script>
-    function changeContent() {
-        $('#content').load('login.jsp');
+    function changeContent(userName,Role) {
+    	alert("hi");
+    	
+    	window.open("section.do?InputUserName1="+userName+"&Role="+Role);
+       // $('#content').load('login.jsp');
     }
     
     </script>
@@ -59,7 +62,8 @@
           </li>
           <c:forEach items="${userRoles}" var="item">
           <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="/section.do?InputUserName1=${username}&Role=${item}" onclick= "changeContent();">
+             
+             <a class="nav-link" href="javascript:changeContent( '${username}','${item}'); return false;">
               <i class="fa fa-fw fa-dashboard"></i>
               <span class="nav-link-text">
                   ${item}</span>

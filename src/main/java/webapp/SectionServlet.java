@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,6 +47,9 @@ public class SectionServlet extends HttpServlet {
 	     System.out.println(request.getParameter("name"));
 		
 		
+	     if(role.equals("Faculty")) {
+	     
+	     
 	     SectionDao sd = new SectionDao();
 	    
 		
@@ -53,9 +57,10 @@ public class SectionServlet extends HttpServlet {
 				//System.out.println(sd.getUserSection(name,role));
 	        	
 						
-			request.setAttribute("section",sd.getUserSection(name,role,term));
+			request.setAttribute("section",sd.getUserSection(name,term));
 			request.setAttribute("programHostName",sd.getProgramHostName());
 			request.setAttribute("term",term);
+			request.setAttribute("Role",role);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -64,7 +69,36 @@ public class SectionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 	        request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);	
-		}
+		
+	     }
+	     
+	     else
+	     {
+	    	 
+	    	 AssCoordinatorInfoDao ad= new AssCoordinatorInfoDao(); 
+	    	 
+	    	 try {
+					
+	    		 System.out.println(ad.getInfo(term));
+		        	
+							
+				request.setAttribute("info",ad.getInfo(term));
+				//request.setAttribute("programHostName",sd.getProgramHostName());
+				request.setAttribute("term",term);
+				request.setAttribute("Role",role);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		        request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);	
+			
+	    	 
+	    	 
+	     }
+	     }
 		
 	
 

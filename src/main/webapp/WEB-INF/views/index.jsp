@@ -34,6 +34,12 @@
 	    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 	    .ui-dialog .ui-state-error { padding: .3em; }
 	    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+	    TH{font-family: Arial; font-size: 8pt;}
+	    TD{font-family: Arial; font-size: 8pt;}
+	    .btn-primary {font-size: 10px;}
+	    .btn-danger {font-size: 10px;}
+	    .content-wrapper {padding-right: 15px;
+                          padding-left: 15px;}
 	</style>
 
     <!-- Custom styles for this template -->
@@ -43,8 +49,8 @@
     
     
     
-	    function doPost(obj) {
-			window.open("/Report.do?parm1="+obj);
+	    function doPost(obj,term) {
+			window.open("/Report.do?parm1="+obj+"&term="+term);
 	    }
 	    function changeContent(userName,Role,term) {
 	    	
@@ -101,31 +107,7 @@
                 <span class="number">12</span>
               </span>
             </a>
-            <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-              <h6 class="dropdown-header">New Messages:</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <strong>David Miller</strong>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <strong>Jane Smith</strong>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <strong>John Doe</strong>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item small" href="#">
-                View all messages
-              </a>
-            </div>
+  
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -138,43 +120,7 @@
                 <span class="number">6</span>
               </span>
             </a>
-            <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-              <h6 class="dropdown-header">New Alerts:</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <span class="text-success">
-                  <strong>
-                    <i class="fa fa-long-arrow-up"></i>
-                    Status Update</strong>
-                </span>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <span class="text-danger">
-                  <strong>
-                    <i class="fa fa-long-arrow-down"></i>
-                    Status Update</strong>
-                </span>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <span class="text-success">
-                  <strong>
-                    <i class="fa fa-long-arrow-up"></i>
-                    Status Update</strong>
-                </span>
-                <span class="small float-right text-muted">11:21 AM</span>
-                <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item small" href="#">
-                View all alerts
-              </a>
-            </div>
+    
           </li>
            <li class="nav-item">
             <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -186,7 +132,7 @@
     </nav>
     
     
-    <div class="container content-wrapper" id="content">
+    <div class="content-wrapper" id="content">
        <%  if(request.getParameter("Role")!=null) {
     	   %>
 		<h2><%= request.getParameter("Role") %> View</h2>
@@ -199,7 +145,7 @@
 		   if(request.getParameter("Role").equals("Faculty")) {
 					%>
 		
-		<font size="3" color="green">Select term </font> <select class="selectpicker" data-style="btn-primary" id = "t1" onchange="changeContent('${username}','Faculty',this)">
+		<font size="3" color="green">Select term </font> <select class="selectpicker" data-style="btn-primary" id = "t1" onchange="changeContent('${username}','${Role}',this)">
 		<c:forEach items="${terms}" var="term"> 
 		<option>${term} </option>
 		</c:forEach> 
@@ -211,7 +157,7 @@
 		
 		
 		<font size="3" color="green">Term: ${term}</font>
-	    <table class="table table-hover" style="width:75%">
+	    <table class="table table-hover" style="width:90%">
 			<thead>
 			  <tr>
 			  	<th>Action</th>
@@ -231,9 +177,16 @@
 					<tr>
 						<td>
 							<span class="nav-link-text">
-								<button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}');">
+							<% if(secSplit[4].equals(" Report"))  {%>
+								<button type="button" id= "report" class="btn btn-danger btn-block btn-sm" onclick="doPost( '${item}','${term}');">
 									<%=secSplit[4] %>
 								</button>
+								<% }%>
+							<% if(secSplit[4].equals(" Update")) { %>
+							<button type="button" id= "report" class="btn btn-primary btn-block btn-sm" onclick="doPost( '${item}','${term}');">
+									<%=secSplit[4] %>
+							</button>
+							<% }%>
 							</span>
 						</td>
 						<td>
@@ -261,17 +214,121 @@
 	        </tbody> 
 		</table>
 		<% } %>
+		
+		<%  if(request.getParameter("Role")!=null) 
+		   if(request.getParameter("Role").equals("Assessment Coordinator")) {
+					%>
+		
+		<font size="3" color="green">Select term </font> <select class="selectpicker" data-style="btn-primary" id = "t1" onchange="changeContent('${username}','${Role}',this)">
+	    <c:forEach items="${terms}" var="term"> 
+		<option>${term} </option>
+		</c:forEach> 
+		</select><br />
+		
+		
+		<p>Submit class and section reports here.</p>
+		
+		
+		
+		<font size="3" color="green">Term: ${term}</font>
+	    <table class="table table-hover" style="width:45%">
+			<thead>
+			  <tr>
+			  	<th>Program</th>
+			    <th>Course</th>
+			    <th>Section</th>
+			    <th>Course name</th>
+			    <th># reported</th>
+			    <th># met/exceed</th>
+			    <th>Percent</th>
+			    <th>Outcome description</th>
+			    <th>Instrument</th>
+			    <th>% of</th>
+			    <th>meet/exceed</th>
+			  </tr>
+			</thead>
+			<tbody>
+	    		<c:forEach items="${info}" var="item">
+	    		
+					<%
+						String sec = ((String)pageContext.getAttribute("item"));
+						String secSplit[] = sec.split("\\|");
+					%>
+					<tr>
+						<td>
+							<span class="nav-link-text">
+									<%=secSplit[0] %>
+								
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[1]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[2]%>
+							</span>
+						</td>
+						<td style="min-width:200px;">
+							<span class="nav-link-text">
+								<%=secSplit[3]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[4]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[5]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[6]%>
+							</span>
+						</td>
+						<td style="min-width:200px;">
+							<span class="nav-link-text">
+								<%=secSplit[7]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[8]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[9]%>
+							</span>
+						</td>
+						<td>
+							<span class="nav-link-text">
+								<%=secSplit[10]%>
+							</span>
+						</td>
+					</tr>
+				</c:forEach>
+	        </tbody> 
+		</table>
+		<% } %>
+		
+		
+		
+		
+		
+		
+		
+		
 	</div>
 
     <!-- /.content-wrapper -->
 
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright &copy; Your Website 2017</small>
-        </div>
-      </div>
-    </footer>
+    
 
     <!-- Scroll to Top Button -->
     <a class="scroll-to-top rounded" href="#page-top">
