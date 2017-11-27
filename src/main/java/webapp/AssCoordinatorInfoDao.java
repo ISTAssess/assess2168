@@ -23,7 +23,29 @@ public class AssCoordinatorInfoDao {
 	    " join courses as c using (coursenumber) where s.term in (?)" + 
 	    " AND s.term = sr.term AND cc.ismiddlestates = true" +
 	    " order by sr.programname, s.coursenumber, s.sectionnumber;";
-			
+		// new db sql
+		String middleStates = " AND e.ismiddlestates = true ";
+		middleStates = "";
+		sql = "SELECT  sr.term, sr.programname 'Program', " + 
+				"        s.coursenumber 'Course', s.sectionnumber 'Section', c.coursename, " + 
+				"        e.ismiddlestates 'Middle State', e.iscore 'Core', " + 
+				"        sr.gradesreportedcount as '# reported', sr.benchmarkmetcount as '# met/exceed',  " + 
+				"        CONCAT(FORMAT(sr.benchmarkmetcount / sr.gradesreportedcount * 100,0),'%') as 'Percent', " + 
+				"        replace(grades, '\\r\\n',', ' ) 'Grades', " + 
+				"        e.outcomedescription, e.instrument,  " + 
+				"        e.percentageofstudents as '% of', e.meetorexceedpercentage as 'meet/exceed' " + 
+				"    from sections as s  " + 
+				"    left join evaluations as e " + 
+				"        using (coursenumber) " + 
+				"    left join sectionsreported as sr " + 
+				"        using (coursenumber,programname,sectionnumber) " + 
+				"    join courses as c " + 
+				"        using (coursenumber) " + 
+				"    where s.term in (?)  " + 
+				"      AND s.term = sr.term " + 
+				middleStates +
+				"    order by sr.programname, s.coursenumber, s.sectionnumber;";
+		
 		System.out.println(term);
 		ArrayList<String> info  =  new ArrayList<String>();
 		DatabaseConnect db = new DatabaseConnect();
