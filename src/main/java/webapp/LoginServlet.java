@@ -36,31 +36,31 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-	
-		//System.out.println("aakash");
-		
-		  String name=request.getParameter("InputUserName1");  
-	      String password=request.getParameter("InputPassword1");  
-	     
-		LoginDao dao= new LoginDao();
-		
-	if(dao.check(name, password))
-		{
-			HttpSession session=request.getSession();  
-	        session.setAttribute("name",dao.usern);
-	        session.setAttribute("username",name);
-	        session.setAttribute("path",dao.imgPath);
-	        System.out.println(dao.imgPath);
-	        
-	        try {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		// System.out.println("aakash");
+
+		String name = request.getParameter("InputUserName1");
+		String password = request.getParameter("InputPassword1");
+
+		LoginDao dao = new LoginDao();
+
+		if (dao.check(name, password)) {
+			HttpSession session = request.getSession();
+			session.setAttribute("name", dao.usern);
+			session.setAttribute("username", name);
+			session.setAttribute("path", dao.imgPath);
+			System.out.println(dao.imgPath);
+
+			try {
 				System.out.println();
-				
-				session.setAttribute("userRoles",dao.getUserRoles(name));
-				
-				session.setAttribute("terms",dao.getTerm());
-				
-			//	session.setAttribute("userRoles",sd.getUserSection(name));
+
+				session.setAttribute("userRoles", dao.getUserRoles(name));
+
+				session.setAttribute("terms", dao.getTerm());
+
+				// session.setAttribute("userRoles",sd.getUserSection(name));
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,16 +68,13 @@ public class LoginServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);	
-		}
-		else {
-			
+			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+		} else {
+
 			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-			
+
 		}
-		
-		
+
 	}
-	
 
 }
