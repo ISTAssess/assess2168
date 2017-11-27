@@ -97,6 +97,7 @@ void updateSectionReport(String sec,String outOf, String grades) throws ClassNot
 		rs.close();
 		int count=0;
 		int metCount =0;
+		// Allow for empty spaces and empty lines in input - sanitize data to allow for this.
 		String[] lines = grades.split("\r\n|\r|\n");
 		for (String line : lines) {
 			if(Integer.parseInt(line)>= perc)

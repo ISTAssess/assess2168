@@ -40,6 +40,8 @@
 	    .btn-danger {font-size: 10px;}
 	    .content-wrapper {padding-right: 15px;
                           padding-left: 15px;}
+		#table-head th { font-size: 18px }
+		#table-body td, #table-body button { font-size: 16px}
 	</style>
 
     <!-- Custom styles for this template -->
@@ -157,9 +159,9 @@
 		
 		
 		<font size="3" color="green">Term: ${term}</font>
-	    <table class="table table-hover" style="width:90%">
+	    <table class="table table-hover" style="width:100%">
 			<thead>
-			  <tr>
+			  <tr id="table-head">
 			  	<th>Action</th>
 			    <th>Course</th>
 			    <th>Section</th>
@@ -174,7 +176,7 @@
 						String sec = ((String)pageContext.getAttribute("item"));
 						String secSplit[] = sec.split("\\|");
 					%>
-					<tr>
+					<tr id="table-body">
 						<td>
 							<span class="nav-link-text">
 							<% if(secSplit[4].equals(" Report"))  {%>

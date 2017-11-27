@@ -31,7 +31,8 @@
    		 var y = document.getElementById("enterGrades");
    		var numbers = /^[0-9]+$/; 
    		var pattern = /^\d+$/;
-   		var lines = $('textarea').val().split('\n');
+   		var lines = $('textarea').val().replace(/\s/g, "\n").replace(/^\s*[\r\n]/gm, "").replace(/,/g, "").split(\n);
+   		y.value = lines;
    		for(var i = 0;i < lines.length;i++){
    			
    			if(!(pattern.test(lines[i])))  
@@ -65,6 +66,12 @@
    	
 			}
 </script>
+<style type="text/css">
+	#outOf {
+		width: 40px;
+		text-align: center;
+	}
+</style>
 
   </head>
 
@@ -84,10 +91,10 @@
             <b>Program Outcome:</b> ${desc} <br /><br />
             
               <b><label for="gr">Grades are out of</label></b>  <input type="text" id = "outOf"  name="outOf" placeholder= "100" value = "${gradeOutOf}" required> <br /><br />
-              <b><label for="engr">Enter grades (Copy from MyCourses and paste here)</label></b> <br />
+              <b><label for="engr">Enter grades (Copy from MyCourses and paste here)</label></b><br />
               <font size="3" color="red">${status}</font>
               <br />
-              <textarea class="form-control" rows="6" name="enterGrades" id= "enterGrades" required>${grades} </textarea>
+              <textarea class="form-control" rows="6" name="enterGrades" id= "enterGrades" required>${grades}</textarea>
               </div>
              <input type="hidden" name="sec" value = "${sec}|${ins}|${desc}">
             <input type="submit" name="btnVal" value = ${btnValue} class="btn btn-primary mx-auto mt-3">

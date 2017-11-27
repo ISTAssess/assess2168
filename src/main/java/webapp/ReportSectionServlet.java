@@ -45,11 +45,11 @@ public class ReportSectionServlet extends HttpServlet {
 			}
 			else
 			{
+				request.setAttribute("gradeOutOf", "100");
 				request.setAttribute("btnValue", "Insert");	
 			}
 			
-			request.getRequestDispatcher("/WEB-INF/views/report.jsp").forward(request, response);	
-			System.out.println("aakash");
+			request.getRequestDispatcher("/WEB-INF/views/report.jsp").forward(request, response);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

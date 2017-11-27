@@ -10,7 +10,7 @@ public class DatabaseConnect {
 	
 	String url = "jdbc:mysql://localhost/istassess?autoReconnect=true&useSSL=false";
 	String username = "root";
-	String password = "Aakash00@@";
+	String password = "HimOrHe123";
 	Connection con;
 	 
 	 
